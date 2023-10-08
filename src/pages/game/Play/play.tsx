@@ -5,12 +5,33 @@ import { CARD_WIDTH, CARD_HEIGHT } from "../../../features/Card/const";
 import { PlayerScore } from "../../../features/Player/components/PlayerScore";
 
 import { useGame } from "../../../features/Game/hooks/useGame";
+import { useState } from "react";
 
 export const Play = () => {
-  const { deck, playCard, playedCards, players, addPoints } = useGame();
+  const { deck, playCard, playedCards, players, addPoints, nameCard } =
+    useGame();
+  const [name, setName] = useState<string>("");
+  const [displayingName, setDisplayingName] = useState("");
+  const [isNameDisplayed, setIsNameDisplayed] = useState(false);
+  const lastPlayedCard = playedCards.at(-1);
 
   const handleDeckClick = () => {
+    setIsNameDisplayed(false);
     playCard();
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleNameButtonClick = () => {
+    nameCard(name);
+    setName("");
+  };
+
+  const handleDisplayNameButtonClick = () => {
+    setDisplayingName(lastPlayedCard?.name ?? "");
+    setIsNameDisplayed(true);
   };
 
   return (
@@ -23,11 +44,14 @@ export const Play = () => {
       </DeckArea>
       <DisplayCardArea>
         {playedCards.length > 0 ? (
-          <img
-            src={playedCards[playedCards.length - 1]?.imgPath}
-            width={CARD_WIDTH}
-            height={CARD_HEIGHT}
-          />
+          <>
+            <img
+              src={lastPlayedCard?.imgPath}
+              width={CARD_WIDTH}
+              height={CARD_HEIGHT}
+            />
+            {lastPlayedCard?.name ?? 'カードの名前がありません'}
+          </>
         ) : (
           <div
             style={{
@@ -40,16 +64,23 @@ export const Play = () => {
       </DisplayCardArea>
       <PlayersArea>
         {players.map((player) => (
-          <PlayerScore player={player} handleAddScoreButton={addPoints} />
+          <PlayerScore
+            key={player.id}
+            player={player}
+            handleAddScoreButton={addPoints}
+          />
         ))}
       </PlayersArea>
       <OperationArea>
         <div>
-          <input />
-          <button>カードに名前をつける</button>
+          <input value={name} onChange={handleNameChange} />
+          <button onClick={handleNameButtonClick}>カードに名前をつける</button>
         </div>
         <div>
-          <button>カードの名前を確認する</button>
+          {isNameDisplayed && <span>{displayingName}</span>}
+          <button onClick={handleDisplayNameButtonClick}>
+            カードの名前を確認する
+          </button>
         </div>
       </OperationArea>
     </StyledPlayLayout>

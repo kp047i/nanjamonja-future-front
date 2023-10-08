@@ -3,13 +3,19 @@ import { Outlet } from "react-router-dom";
 import { Card } from "../../features/Card/type";
 import { Player } from "../Player/type";
 
-const dummyCard = {
-  imgPath:
-    "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  userName: "kappy",
+const dummyCard = (index: number) => {
+  return {
+    id: String(index),
+    imgPath:
+      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
+    userName: "kappy",
+    name: "",
+  };
 };
 
-const dummyDeck: Card[] = [...Array(24)].map(() => dummyCard);
+const dummyDeck: Card[] = [...Array(24)].map((_, index) =>
+  dummyCard(index % 2)
+);
 
 const dummyPlayers: Player[] = [
   {
@@ -51,6 +57,7 @@ export type GameContext = {
   createDeck: (selectedCard: Card[]) => void;
   playCard: () => Card | undefined;
   addPoints: (id: string) => void;
+  nameCard: (name: string) => void;
 };
 
 export const GameLayout = () => {
@@ -77,13 +84,42 @@ export const GameLayout = () => {
   };
 
   const addPoints = (id: string) => {
-    const player = players.find((player) => player.id === id);
-    if (!player) {
+    const scoreAddedPlayers = players.map((player) => {
+      if (player.id === id) {
+        return {
+          ...player,
+          score: player.score + playedCards.length,
+        };
+      }
+      return player;
+    });
+
+    setPlayers([...scoreAddedPlayers]);
+    setPlayedCards([]);
+  };
+
+  const nameCard = (name: string) => {
+    const lastPlayedCard = playedCards.at(-1);
+
+    if (!lastPlayedCard) {
       return;
     }
-    player.score += playedCards.length;
-    setPlayers([...players]);
-    setPlayedCards([]);
+
+    const namedDeck = deck.map((card) => {
+      if (card.id === lastPlayedCard.id) {
+        // すでに名前がついていたら名前を更新しない
+        if (card.name !== "") {
+          return card;
+        }
+        return {
+          ...card,
+          name: name,
+        };
+      }
+      return card;
+    });
+
+    setDeck([...namedDeck]);
   };
 
   return (
@@ -96,6 +132,7 @@ export const GameLayout = () => {
           playCard,
           players,
           addPoints,
+          nameCard,
         } satisfies GameContext
       }
     />
