@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { CardCheckBox } from "../../features/Card/components/CardCheckBox";
-import './style.css'
+import "./style.css";
 
 import { useCards } from "../../features/Card/hooks/useCards";
 import { Card } from "../../features/Card/type";
@@ -13,7 +13,7 @@ const MAX_SELECTABLE_CARD_COUNT = 4;
 // 選択するカードの最小の数
 const MIN_SELECTABLE_CARD_COUNT = 2;
 
-export const Robby = () => {
+export const Lobby = () => {
   const { cards, selectedCards, appendSelectedCards, removeSelectedCards } =
     useCards();
 
@@ -57,7 +57,7 @@ export const Robby = () => {
               card={card}
               checked={selectedCards.includes(card)}
               handleChange={() => handleChange(card)}
-              />
+            />
           </CardWrapper>
         ))}
       </CardList>
@@ -66,13 +66,22 @@ export const Robby = () => {
         {[...new Array(selectedCards.length)].map((_, index) => (
           <HumanImg key={index} src="/images/participate.png" alt="" />
         ))}
-        {[...new Array(MAX_SELECTABLE_CARD_COUNT - selectedCards.length)].map((_, index) => (
-          <HumanImg key={index} src="/images/stand.png" alt="" />
-        ))}
+        {[...new Array(MAX_SELECTABLE_CARD_COUNT - selectedCards.length)].map(
+          (_, index) => (
+            <HumanImg key={index} src="/images/stand.png" alt="" />
+          )
+        )}
       </ParticipateHumans>
 
-      <GameStart data-submittable={selectedCards.length > MIN_SELECTABLE_CARD_COUNT}>
-        <Button onClick={handleStartButtonClick} style={{fontSize: '24px', fontWeight: 800, color: '#fff'}}>Start!</Button>
+      <GameStart
+        data-submittable={selectedCards.length > MIN_SELECTABLE_CARD_COUNT}
+      >
+        <Button
+          onClick={handleStartButtonClick}
+          style={{ fontSize: "24px", fontWeight: 800, color: "#fff" }}
+        >
+          Start!
+        </Button>
       </GameStart>
     </GameLayout>
   );
@@ -91,14 +100,14 @@ const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const GameStart = styled.div`
   box-sizing: border-box;
   position: fixed;
   right: -30px;
   bottom: -30px;
-  background-color: #EC5F43;
+  background-color: #ec5f43;
   color: #fff;
   width: 160px;
   height: 160px;
@@ -117,7 +126,7 @@ const GameStart = styled.div`
     background-color: #aaa;
     pointer-events: none;
   }
-`
+`;
 
 const ParticipateHumans = styled.div`
   position: fixed;
@@ -126,8 +135,8 @@ const ParticipateHumans = styled.div`
   display: flex;
   align-items: flex-end;
   height: 85px;
-`
+`;
 
 const HumanImg = styled.img`
   width: 40px;
-`
+`;
