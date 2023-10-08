@@ -17,6 +17,8 @@ const DUMMY_CARDS: Card[] = [
   }
 ];
 
+const GET_CARDS_URL = 'https://h3nckvn8-8000.asse.devtunnels.ms/api/user/get/';
+
 export const useCards = () => {
   const [cards, setCards] = useState<Card[] | null>(DUMMY_CARDS);
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
@@ -34,7 +36,7 @@ export const useCards = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("https://h3nckvn8-8000.asse.devtunnels.ms/api/user/get/").then((res) => res.json());
+      const res = await fetch(GET_CARDS_URL).then((res) => res.json());
       setCards(res);
     })()
   }, [])

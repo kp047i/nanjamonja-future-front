@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { CardCheckBox } from "../../features/Card/components/CardCheckBox";
+import './style.css'
 
 import { useCards } from "../../features/Card/hooks/useCards";
 import { Card } from "../../features/Card/type";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { CARD_WIDTH } from "../../features/Card/const";
 import { useGame } from "../../features/Game/hooks/useGame";
 
 // 選択できるカードの最大の数
@@ -51,30 +51,82 @@ export const Robby = () => {
     <GameLayout>
       <CardList>
         {cards.map((card) => (
-          <CardCheckBox
-            key={card.user_name}
-            card={card}
-            checked={selectedCards.includes(card)}
-            handleChange={() => handleChange(card)}
-          />
+          <CardWrapper>
+            <CardCheckBox
+              key={card.user_name}
+              card={card}
+              checked={selectedCards.includes(card)}
+              handleChange={() => handleChange(card)}
+              />
+          </CardWrapper>
         ))}
       </CardList>
-      <p>ゲームの最小人数: {MIN_SELECTABLE_CARD_COUNT}人</p>
-      <p>ゲームの最大人数: {MAX_SELECTABLE_CARD_COUNT}人</p>
-      <p>選択されている人数: {selectedCards.length}人</p>
-      <Button onClick={handleStartButtonClick}>ゲームを開始する</Button>
+
+      <ParticipateHumans>
+        {[...new Array(selectedCards.length)].map((_, index) => (
+          <HumanImg key={index} src="/images/participate.png" alt="" />
+        ))}
+        {[...new Array(MAX_SELECTABLE_CARD_COUNT - selectedCards.length)].map((_, index) => (
+          <HumanImg key={index} src="/images/stand.png" alt="" />
+        ))}
+      </ParticipateHumans>
+
+      <GameStart data-submittable={selectedCards.length > MIN_SELECTABLE_CARD_COUNT}>
+        <Button onClick={handleStartButtonClick} style={{fontSize: '24px', fontWeight: 800, color: '#fff'}}>Start!</Button>
+      </GameStart>
     </GameLayout>
   );
 };
 
 const GameLayout = styled.div`
-  width: 100vh;
-  height: 100vh;
+  padding: 80px 200px 80px 100px;
 `;
 
 const CardList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, ${CARD_WIDTH}px);
-  gap: 48px;
-  place-content: center;
+  display: flex;
 `;
+
+const CardWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const GameStart = styled.div`
+  box-sizing: border-box;
+  position: fixed;
+  right: -30px;
+  bottom: -30px;
+  background-color: #EC5F43;
+  color: #fff;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+  transition: transform 0.2s ease-out;
+  padding: 0 10px 10px 0;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &[data-submittable="false"] {
+    background-color: #aaa;
+    pointer-events: none;
+  }
+`
+
+const ParticipateHumans = styled.div`
+  position: fixed;
+  right: 10px;
+  top: 40px;
+  display: flex;
+  align-items: flex-end;
+  height: 85px;
+`
+
+const HumanImg = styled.img`
+  width: 40px;
+`
