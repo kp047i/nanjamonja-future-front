@@ -4,7 +4,10 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Game } from "./pages/game/index.tsx";
+
+import { Robby } from "./pages/game/Robby";
+import { Play } from "./pages/game/Play/play.tsx";
+import { GameLayout } from "./features/Game/GameContext.tsx";
 import { Character } from "./pages/character/index.tsx";
 
 const router = createBrowserRouter([
@@ -13,13 +16,23 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/game",
-    element: <Game />,
+    path: "game",
+    element: <GameLayout />,
+    children: [
+      {
+        path: "robby",
+        element: <Robby />,
+      },
+      {
+        path: "play",
+        element: <Play />,
+      },
+    ],
   },
   {
     path: "/character",
-    element: <Character />
-  }
+    element: <Character />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
