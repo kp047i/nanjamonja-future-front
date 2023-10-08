@@ -4,9 +4,10 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { GameLayout } from "./pages/game/GameLayout";
+
 import { Robby } from "./pages/game/Robby";
 import { Play } from "./pages/game/Play/play.tsx";
+import { GameLayout } from "./features/Game/GameContext.tsx";
 
 const router = createBrowserRouter([
   {
