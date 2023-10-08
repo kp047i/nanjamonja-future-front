@@ -10,6 +10,7 @@ export type CardCheckBoxProps = {
 };
 
 export const CardCheckBox: React.FC<CardCheckBoxProps> = ({
+  card,
   checked,
   handleChange,
 }) => {
@@ -24,13 +25,13 @@ export const CardCheckBox: React.FC<CardCheckBoxProps> = ({
         />
         {checked && <StyledCheckIcon checked={checked} />}
         <StyledImg
-          src="https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png"
+          src={card.imgPath}
           width={CARD_WIDTH}
           height={CARD_HEIGHT}
           checked={checked}
         />
       </ImgWrapper>
-      <p>kappy</p>
+      <p>{card.userName}</p>
     </StyledCardCheckBox>
   );
 };

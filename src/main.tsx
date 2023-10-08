@@ -6,7 +6,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { GameLayout } from "./pages/game/GameLayout";
 import { Robby } from "./pages/game/Robby";
-import { Play } from "./pages/game/Play.tsx";
+import { Play } from "./pages/game/Play/play.tsx";
 
 const router = createBrowserRouter([
   {
