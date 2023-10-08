@@ -3,49 +3,14 @@
 import styled from "styled-components";
 import { CARD_WIDTH, CARD_HEIGHT } from "../../../features/Card/const";
 import { PlayerScore } from "../../../features/Player/components/PlayerScore";
-import { Player } from "../../../features/Player/type";
-import { Card } from "../../../features/Card/type";
+
 import { useGame } from "../../../features/Game/hooks/useGame";
 
-const dummyPlayers: Player[] = [
-  {
-    name: "Taro Yamada",
-    score: 150,
-  },
-  {
-    name: "Hanako Tanaka",
-    score: 120,
-  },
-  {
-    name: "Kenji Suzuki",
-    score: 180,
-  },
-  {
-    name: "Yuki Sato",
-    score: 170,
-  },
-  {
-    name: "Rina Takahashi",
-    score: 200,
-  },
-  {
-    name: "Yusuke Watanabe",
-    score: 110,
-  },
-];
-
-const dummyCard = {
-  imgPath:
-    "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  userName: "kappy",
-};
-
-const dummyDeck: Card[] = [...Array(24)].map(() => dummyCard);
-
 export const Play = () => {
-  const { deck } = useGame();
+  const { deck, playCard, playedCards, players, addPoints } = useGame();
+
   const handleDeckClick = () => {
-    console.log("deck clicked");
+    playCard();
   };
 
   return (
@@ -54,12 +19,28 @@ export const Play = () => {
         <button onClick={handleDeckClick}>
           <img src="/images/deck.png" width={CARD_WIDTH} height={CARD_HEIGHT} />
         </button>
-        残りの枚数: {dummyDeck.length}枚
+        残りの枚数: {deck.length}枚
       </DeckArea>
-      <DisplayCardArea>カードのすて札エリア</DisplayCardArea>
+      <DisplayCardArea>
+        {playedCards.length > 0 ? (
+          <img
+            src={playedCards[playedCards.length - 1]?.imgPath}
+            width={CARD_WIDTH}
+            height={CARD_HEIGHT}
+          />
+        ) : (
+          <div
+            style={{
+              width: CARD_WIDTH,
+              height: CARD_HEIGHT,
+            }}
+          ></div>
+        )}
+        捨てられたカードの枚数: {playedCards.length}枚
+      </DisplayCardArea>
       <PlayersArea>
-        {dummyPlayers.map((player) => (
-          <PlayerScore player={player} />
+        {players.map((player) => (
+          <PlayerScore player={player} handleAddScoreButton={addPoints} />
         ))}
       </PlayersArea>
       <OperationArea>
@@ -95,10 +76,14 @@ const DeckArea = styled.div`
 const DisplayCardArea = styled.div`
   padding: 16px;
   grid-area: 1 / 2 / 2 / 3;
+  display: grid;
+  place-content: center;
 `;
 
 const PlayersArea = styled.div`
   grid-area: 1 / 3 / 2 / 4;
+  display: grid;
+  gap: 32px;
 `;
 
 const OperationArea = styled.div`

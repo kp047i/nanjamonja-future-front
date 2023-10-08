@@ -4,9 +4,9 @@ import { CardCheckBox } from "../../features/Card/components/CardCheckBox";
 import { useCards } from "../../features/Card/hooks/useCards";
 import { Card } from "../../features/Card/type";
 import { Button } from "../../components/Button";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CARD_WIDTH } from "../../features/Card/const";
-import { GameContext } from "./GameLayout";
+import { useGame } from "../../features/Game/hooks/useGame";
 
 // 選択できるカードの最大の数
 const MAX_SELECTABLE_CARD_COUNT = 4;
@@ -17,7 +17,7 @@ export const Robby = () => {
   const { cards, selectedCards, appendSelectedCards, removeSelectedCards } =
     useCards();
 
-  const { createDeck } = useOutletContext<GameContext>();
+  const { createDeck } = useGame();
 
   const navigate = useNavigate();
 

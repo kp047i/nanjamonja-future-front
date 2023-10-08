@@ -5,12 +5,12 @@ const dummyCards: Card[] = [
   {
     userName: "user1",
     imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
+      "https://firebasestorage.googleapis.com/v0/b/aisozai.appspot.com/o/watermarked_pictures%2F768[…]?alt=media&token=789370fc-9939-4f19-abef-68b2624cf3bc",
   },
   {
     userName: "user2",
     imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
+      "https://storage.googleapis.com/aisozai-thumbnails/watermarked_pictures/384x256/qwchRTyTfL.jpeg",
   },
   {
     userName: "user3",
@@ -20,12 +20,12 @@ const dummyCards: Card[] = [
   {
     userName: "user4",
     imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
+      "https://publicdomainq.net/pictures/2023s/2023-07s/2023-07-31s/publicdomainq-0073395ztv.jpg",
   },
   {
     userName: "user5",
     imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
+      "https://publicdomainq.net/pictures/2023s/2023-06s/2023-06-16s/publicdomainq-0072479rlg.jpg",
   },
   {
     userName: "user6",
