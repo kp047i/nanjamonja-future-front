@@ -31,7 +31,7 @@ export const PickColors = ({selectColor}: Props) => {
   return (
     <ColorsWrapper>
       {COLORS.map((color) => (
-        <button onClick={() => selectColor(color)}>
+        <button key={color} onClick={() => selectColor(color)}>
           <ColorPicker style={{backgroundColor: color}}></ColorPicker>
         </button>
       ))}

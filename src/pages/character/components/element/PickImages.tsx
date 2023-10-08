@@ -45,7 +45,7 @@ export const PickImages = ({ selectImage }: Props) => {
   return (
     <ImageWrapper>
       {IMAGES_PATHS.map((path) => (
-        <button onClick={() => select(`/assets/parts/${path}`)}>
+        <button key={path} onClick={() => select(`/assets/parts/${path}`)}>
           <PartsImage src={`/assets/parts/${path}`} alt="" />
         </button>
       ))}

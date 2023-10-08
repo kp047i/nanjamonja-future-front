@@ -4,7 +4,8 @@ import { PickColors } from "../element/PickColors";
 import { PickImages } from "../element/PickImages";
 
 interface Props {
-  next?: () => void;
+  next: () => void;
+  setCharacter: React.Dispatch<React.SetStateAction<string>>
 }
 
 const CanvasWrapper = styled.div`
@@ -45,7 +46,7 @@ const TabWrapper = styled.div`
 
 type Tab = 'color' | 'image';
 
-export const OekakiScene = ({ next }: Props) => { 
+export const OekakiScene = ({ next, setCharacter }: Props) => { 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
 
@@ -138,9 +139,14 @@ export const OekakiScene = ({ next }: Props) => {
     }
   }, [tab, drawMove]);
 
+  const finishDrawCharacter = useCallback(() => {
+    setCharacter('aaa');
+    next();
+  }, [setCharacter, next])
+
   return (
     <CanvasWrapper>
-      <FinishButton onClick={next}>完成</FinishButton>
+      <FinishButton onClick={finishDrawCharacter}>完成</FinishButton>
       <CanvasOekaki ref={canvasRef} width="1024" height="1433" onTouchStart={(e) => touchStart(e)} onTouchMove={(e) => touchMove(e)}></CanvasOekaki>
 
       <TabWrapper>
