@@ -5,11 +5,16 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Game } from "./pages/game/index.tsx";
+import { Robby } from "./pages/robby/index.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/robby",
+    element: <Robby />,
   },
   {
     path: "/game",
