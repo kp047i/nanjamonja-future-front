@@ -25,13 +25,13 @@ export const CardCheckBox: React.FC<CardCheckBoxProps> = ({
         />
         {checked && <StyledCheckIcon checked={checked} />}
         <StyledImg
-          src={card.imgPath}
+          src={card.content}
           width={CARD_WIDTH}
           height={CARD_HEIGHT}
           checked={checked}
         />
       </ImgWrapper>
-      <p>{card.userName}</p>
+      <p>{card.user_name}</p>
     </StyledCardCheckBox>
   );
 };
