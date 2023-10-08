@@ -5,7 +5,7 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Robby } from "./pages/game/Robby";
+import { Lobby } from "./pages/game/Lobby";
 import { Play } from "./pages/game/Play/play.tsx";
 import { GameLayout } from "./features/Game/GameContext.tsx";
 import { Character } from "./pages/character/index.tsx";
@@ -20,8 +20,8 @@ const router = createBrowserRouter([
     element: <GameLayout />,
     children: [
       {
-        path: "robby",
-        element: <Robby />,
+        path: "Lobby",
+        element: <Lobby />,
       },
       {
         path: "play",
