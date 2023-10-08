@@ -13,6 +13,14 @@ const CharacterLayout = styled.div`
   height: 100svh;
 `;
 
+const Card = () => {
+  return (
+    <div style={{background: '#fff', width: '90%', height: '200px', borderRadius: '20px', margin: 'auto'}}>
+      <p>カードだよ</p>
+    </div>
+  )
+}
+
 export const Character = () => {
   const [scene, setScene] = useState<Scene>('username');
   const [userName, setUserName] = useState<string>('');
