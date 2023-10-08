@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { Card } from "../type";
+import { CARD_HEIGHT, CARD_WIDTH } from "../const";
 
 export type CardCheckBoxProps = {
   card: Card;
@@ -21,11 +22,11 @@ export const CardCheckBox: React.FC<CardCheckBoxProps> = ({
           checked={checked}
           onChange={handleChange}
         />
-        <StyledCheckIcon checked={checked} />
+        {checked && <StyledCheckIcon checked={checked} />}
         <StyledImg
           src="https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png"
-          width={160}
-          height={240}
+          width={CARD_WIDTH}
+          height={CARD_HEIGHT}
           checked={checked}
         />
       </ImgWrapper>
@@ -39,6 +40,11 @@ const StyledCardCheckBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 160px;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: 0.2s;
+  }
 `;
 
 const ImgWrapper = styled.label`
@@ -46,30 +52,29 @@ const ImgWrapper = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000;
-  width: 160px;
-  height: 240px;
+  width: ${CARD_WIDTH}px;
+  height: ${CARD_HEIGHT}px;
 `;
 
 const StyledImg = styled.img<{ checked: boolean }>`
   position: absolute;
   left: 0;
+
   ${({ checked }) =>
     checked &&
     css`
-      opacity: 0.6;
+      filter: brightness(50%);
     `}
 `;
 
 const StyledCheckbox = styled.input`
-  /* position: absolute;
-  left: 0; */
   width: 0;
   height: 0;
 `;
 
 const StyledCheckIcon = styled(AiOutlineCheckCircle)<{ checked: boolean }>`
+  z-index: 1;
   width: 80px;
   height: 80px;
-  color: green;
+  color: #22c55e;
 `;
