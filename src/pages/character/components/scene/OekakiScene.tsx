@@ -140,7 +140,8 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
   }, [tab, drawMove]);
 
   const finishDrawCharacter = useCallback(() => {
-    setCharacter('aaa');
+    const dataUrl = canvasRef.current?.toDataURL("image/jpeg", 0.75) as string;
+    setCharacter(dataUrl);
     next();
   }, [setCharacter, next])
 
