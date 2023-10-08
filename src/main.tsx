@@ -4,8 +4,9 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Game } from "./pages/game/index.tsx";
-import { Robby } from "./pages/robby/index.tsx";
+import { GameLayout } from "./pages/game/GameLayout";
+import { Robby } from "./pages/game/Robby";
+import { Play } from "./pages/game/Play.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,12 +14,18 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/robby",
-    element: <Robby />,
-  },
-  {
-    path: "/game",
-    element: <Game />,
+    path: "game",
+    element: <GameLayout />,
+    children: [
+      {
+        path: "robby",
+        element: <Robby />,
+      },
+      {
+        path: "play",
+        element: <Play />,
+      },
+    ],
   },
 ]);
 

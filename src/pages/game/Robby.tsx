@@ -5,6 +5,7 @@ import { useCards } from "../../features/Card/hooks/useCards";
 import { Card } from "../../features/Card/type";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
+import { CARD_WIDTH } from "../../features/Card/const";
 
 // 選択できるカードの最大の数
 const MAX_SELECTABLE_CARD_COUNT = 4;
@@ -69,7 +70,7 @@ const GameLayout = styled.div`
 
 const CardList = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 160px);
-  gap: 64px;
+  grid-template-columns: repeat(3, ${CARD_WIDTH}px);
+  gap: 48px;
   place-content: center;
 `;
