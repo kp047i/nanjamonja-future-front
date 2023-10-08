@@ -84,6 +84,7 @@ const GameLayout = styled.div`
 
 const CardList = styled.div`
   display: flex;
+  gap: 20px;
 `;
 
 const CardWrapper = styled.div`

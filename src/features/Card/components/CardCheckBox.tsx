@@ -31,7 +31,7 @@ export const CardCheckBox: React.FC<CardCheckBoxProps> = ({
           checked={checked}
         />
       </ImgWrapper>
-      <p>{card.user_name}</p>
+      <UserName>{card.user_name}</UserName>
     </StyledCardCheckBox>
   );
 };
@@ -80,3 +80,8 @@ const StyledCheckIcon = styled(AiOutlineCheckCircle)<{ checked: boolean }>`
   transform: translate(-50%, -50%);
   pointer-events: none;
 `;
+
+const UserName = styled.p`
+  font-size: 12px;
+  font-weight: 800;
+`
