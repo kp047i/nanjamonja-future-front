@@ -49,7 +49,7 @@ export const Play = () => {
           <button>カードに名前をつける</button>
         </div>
         <div>
-          <button>カードに名前を確認する</button>
+          <button>カードの名前を確認する</button>
         </div>
       </OperationArea>
     </StyledPlayLayout>
