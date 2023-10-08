@@ -5,8 +5,20 @@ export type UseCards = {
   cards: Card[] | undefined;
 };
 
+const DUMMY_CARDS: Card[] = [
+  {
+    content: "",
+    default_flg: 0,
+    highest_score: 0,
+    id: "34",
+    participant_count: 0,
+    user_name: "ジョグ",
+    name: ''
+  }
+];
+
 export const useCards = () => {
-  const [cards, setCards] = useState<Card[] | null>(null);
+  const [cards, setCards] = useState<Card[] | null>(DUMMY_CARDS);
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
 
   const appendSelectedCards = (card: Card) => {
