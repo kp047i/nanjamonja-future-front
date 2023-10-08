@@ -7,7 +7,7 @@ export type UseCards = {
 
 const DUMMY_CARDS: Card[] = [
   {
-    content: "",
+    content: "https://firebasestorage.googleapis.com/v0/b/aisozai.appspot.com/o/watermarked_pictures%2F768x512%2FATJzfvSQSC.jpeg?alt=media&token=789370fc-9939-4f19-abef-68b2624cf3bc",
     default_flg: 0,
     highest_score: 0,
     id: "34",
