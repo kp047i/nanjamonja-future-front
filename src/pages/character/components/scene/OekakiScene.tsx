@@ -11,7 +11,8 @@ interface Props {
 const CanvasWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 20vw;
   height: 100%;
 `
 
