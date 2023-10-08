@@ -46,11 +46,11 @@ export const Play = () => {
         {playedCards.length > 0 ? (
           <>
             <img
-              src={lastPlayedCard?.imgPath}
+              src={lastPlayedCard?.content}
               width={CARD_WIDTH}
               height={CARD_HEIGHT}
             />
-            {lastPlayedCard?.name ?? 'カードの名前がありません'}
+            {lastPlayedCard?.name ?? "カードの名前がありません"}
           </>
         ) : (
           <div
