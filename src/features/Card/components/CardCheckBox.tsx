@@ -31,40 +31,36 @@ export const CardCheckBox: React.FC<CardCheckBoxProps> = ({
           checked={checked}
         />
       </ImgWrapper>
-      <p>{card.user_name}</p>
+      <UserName>{card.user_name}</UserName>
     </StyledCardCheckBox>
   );
 };
 
 const StyledCardCheckBox = styled.div`
+  width: 160px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 160px;
-  :hover {
-    cursor: pointer;
-    transform: scale(1.02);
-    transition: 0.2s;
-  }
 `;
 
 const ImgWrapper = styled.label`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: ${CARD_WIDTH}px;
-  height: ${CARD_HEIGHT}px;
+  transition: transform 0.2s ease-out;
+  &:hover {
+    transform: scale(1.04);
+  }
 `;
 
 const StyledImg = styled.img<{ checked: boolean }>`
-  position: absolute;
-  left: 0;
-
+  cursor: pointer;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  
   ${({ checked }) =>
     checked &&
     css`
-      filter: brightness(50%);
+      filter: brightness(50%) drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     `}
 `;
 
@@ -78,4 +74,14 @@ const StyledCheckIcon = styled(AiOutlineCheckCircle)<{ checked: boolean }>`
   width: 80px;
   height: 80px;
   color: #22c55e;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 `;
+
+const UserName = styled.p`
+  font-size: 12px;
+  font-weight: 800;
+`

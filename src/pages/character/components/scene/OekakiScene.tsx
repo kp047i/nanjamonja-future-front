@@ -51,10 +51,9 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
 
-  const [tab, setTab] = useState<Tab>('color')
-
   const [color, setColor] = useState<string>('#000000');
   const [image, setImage] = useState<HTMLImageElement | null>(null);
+  const [tab, setTab] = useState<Tab>('color')
 
   useEffect(() => {
     const html = document.querySelector('html') as HTMLHtmlElement;
