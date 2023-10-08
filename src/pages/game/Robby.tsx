@@ -52,7 +52,7 @@ export const Robby = () => {
       <CardList>
         {cards.map((card) => (
           <CardCheckBox
-            key={card.userName}
+            key={card.user_name}
             card={card}
             checked={selectedCards.includes(card)}
             handleChange={() => handleChange(card)}

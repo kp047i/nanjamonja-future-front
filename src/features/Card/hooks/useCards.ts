@@ -1,56 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "../type";
-
-const dummyCards: Card[] = [
-  {
-    userName: "user1",
-    imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  },
-  {
-    userName: "user2",
-    imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  },
-  {
-    userName: "user3",
-    imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  },
-  {
-    userName: "user4",
-    imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  },
-  {
-    userName: "user5",
-    imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  },
-  {
-    userName: "user6",
-    imgPath:
-      "https://res.cloudinary.com/techfeed/image/upload/w_96,h_96,c_fill/v1585110459/users/wqrb2bwadnhi0df00qmm.png",
-  },
-];
 
 export type UseCards = {
   cards: Card[] | undefined;
 };
 
 export const useCards = () => {
-  const [cards] = useState<Card[] | undefined>(dummyCards);
+  const [cards, setCards] = useState<Card[] | null>(null);
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
 
   const appendSelectedCards = (card: Card) => {
     setSelectedCards([...selectedCards, card]);
   };
+
   const removeSelectedCards = (card: Card) => {
     const newSelectedCards = selectedCards.filter(
-      (selectedCard) => selectedCard.userName !== card.userName
+      (selectedCard) => selectedCard.user_name !== card.user_name
     );
     setSelectedCards(newSelectedCards);
   };
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("https://h3nckvn8-8000.asse.devtunnels.ms/api/user/get/").then((res) => res.json());
+      setCards(res);
+    })()
+  }, [])
 
   return {
     cards,
