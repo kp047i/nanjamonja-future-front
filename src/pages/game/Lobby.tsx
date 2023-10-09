@@ -13,8 +13,13 @@ const MAX_SELECTABLE_CARD_COUNT = 4;
 const MIN_SELECTABLE_CARD_COUNT = 2;
 
 export const Lobby = () => {
-  const { cards, selectedCards, appendSelectedCards, removeSelectedCards } =
-    useCards();
+  const {
+    cards,
+    selectedCards,
+    appendSelectedCards,
+    removeSelectedCards,
+    selectRandomCards,
+  } = useCards();
 
   const { startGame } = useGame();
 
@@ -38,12 +43,18 @@ export const Lobby = () => {
     if (selectedCards.length < MIN_SELECTABLE_CARD_COUNT) {
       return;
     }
-    startGame(selectedCards);
+    // 8種類になったカード
+    // 名前むずい
+    const randomlySelectedCards = selectRandomCards();
+    if (!randomlySelectedCards) {
+      return;
+    }
+    startGame(selectedCards, randomlySelectedCards);
     navigate("/game/play");
   };
 
   if (!cards) {
-    return <div>loading...</div>;
+    return <GameLayout>loading...</GameLayout>;
   }
 
   return (
