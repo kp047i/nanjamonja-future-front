@@ -7,7 +7,7 @@ export type GameContext = {
   deck: Card[];
   players: Player[];
   playedCards: Card[];
-  startGame: (selectedCard: Card[]) => void;
+  startGame: (selectedCard: Card[], randomlySelectedCard: Card[]) => void;
   playCard: () => Card | undefined;
   addPoints: (id: string) => void;
   nameCard: (character_name: string) => void;
@@ -18,17 +18,13 @@ export const GameLayout = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [playedCards, setPlayedCards] = useState<Card[]>([]);
 
-  const startGame = (selectedCard: Card[]) => {
-    createDeck(selectedCard);
+  const startGame = (selectedCard: Card[], randomlySelectedCard: Card[]) => {
+    createDeck([...selectedCard, ...randomlySelectedCard]);
     createPlayers(selectedCard);
   };
 
-  const createDeck = (selectedCard: Card[]) => {
-    setDeck(
-      [...selectedCard, ...selectedCard, ...selectedCard].sort(
-        () => Math.random() - 0.5
-      )
-    );
+  const createDeck = (cards: Card[]) => {
+    setDeck([...cards, ...cards, ...cards].sort(() => Math.random() - 0.5));
   };
 
   const createPlayers = (selectedCard: Card[]) => {
