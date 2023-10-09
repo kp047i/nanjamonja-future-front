@@ -17,7 +17,7 @@ export const Lobby = () => {
   const { cards, selectedCards, appendSelectedCards, removeSelectedCards } =
     useCards();
 
-  const { createDeck } = useGame();
+  const { startGame } = useGame();
 
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ export const Lobby = () => {
     if (selectedCards.length < MIN_SELECTABLE_CARD_COUNT) {
       return;
     }
-    createDeck(selectedCards);
+    startGame(selectedCards);
     navigate("/game/play");
   };
 
