@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { PickColors } from "../element/PickColors";
 import { PickImages } from "../element/PickImages";
 import { NextButton } from "../element/NextButton";
+import { BsFillTrashFill } from 'react-icons/bs'
 
 interface Props {
   next: () => void;
@@ -38,6 +39,20 @@ const TabWrapper = styled.div`
   bottom: 20vw;
   left: 0;
   padding: 0 10vw;
+`
+
+const IconTrashWrapper = styled.div`
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: #fff solid 2px;
 `
 
 type Tab = 'color' | 'image';
@@ -114,6 +129,12 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
     ctx.drawImage(image, x - image.width / 2, y - image.height / 2);
   }, [image, ctx, getPosition]);
 
+  const clearCanvas = useCallback(() => {
+    if (!ctx || !canvasRef.current) return;
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  }, [ctx]);
+
   useEffect(() => {
     if (!ctx) return;
     ctx.strokeStyle = color;
@@ -146,6 +167,9 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
   return (
     <CanvasWrapper>
       <NextButton onClick={finishDrawCharacter}>完成</NextButton>
+      <IconTrashWrapper onClick={clearCanvas}>
+        <BsFillTrashFill size="16px" color="#fff"></BsFillTrashFill>
+      </IconTrashWrapper>
       <CanvasOekaki ref={canvasRef} width="1024" height="1433" onTouchStart={(e) => touchStart(e)} onTouchMove={(e) => touchMove(e)} onTouchEnd={touchEnd}></CanvasOekaki>
 
       <TabWrapper>
