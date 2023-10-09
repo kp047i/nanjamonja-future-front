@@ -1,5 +1,3 @@
-// import { useGame } from "../../features/Game/hooks/useGame";
-
 import styled from "styled-components";
 import { CARD_WIDTH, CARD_HEIGHT } from "../../../features/Card/const";
 import { PlayerScore } from "../../../features/Player/components/PlayerScore";
@@ -10,7 +8,7 @@ import { useState } from "react";
 export const Play = () => {
   const { deck, playCard, playedCards, players, addPoints, nameCard } =
     useGame();
-  const [name, setName] = useState<string>("");
+  const [characterName, setCharacterName] = useState<string>("");
   const [displayingName, setDisplayingName] = useState("");
   const [isNameDisplayed, setIsNameDisplayed] = useState(false);
   const lastPlayedCard = playedCards.at(-1);
@@ -21,18 +19,20 @@ export const Play = () => {
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+    setCharacterName(e.target.value);
   };
 
   const handleNameButtonClick = () => {
-    nameCard(name);
-    setName("");
+    nameCard(characterName);
+    setCharacterName("");
   };
 
   const handleDisplayNameButtonClick = () => {
-    setDisplayingName(lastPlayedCard?.name ?? "");
+    setDisplayingName(lastPlayedCard?.character_name ?? "");
     setIsNameDisplayed(true);
   };
+
+  console.log(deck);
 
   return (
     <StyledPlayLayout>
@@ -50,7 +50,7 @@ export const Play = () => {
               width={CARD_WIDTH}
               height={CARD_HEIGHT}
             />
-            {lastPlayedCard?.name ?? "カードの名前がありません"}
+            {lastPlayedCard?.character_name ?? "カードの名前がありません"}
           </>
         ) : (
           <div
@@ -73,7 +73,7 @@ export const Play = () => {
       </PlayersArea>
       <OperationArea>
         <div>
-          <input value={name} onChange={handleNameChange} />
+          <input value={characterName} onChange={handleNameChange} />
           <button onClick={handleNameButtonClick}>カードに名前をつける</button>
         </div>
         <div>

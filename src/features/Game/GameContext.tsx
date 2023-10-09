@@ -10,7 +10,7 @@ export type GameContext = {
   startGame: (selectedCard: Card[]) => void;
   playCard: () => Card | undefined;
   addPoints: (id: string) => void;
-  nameCard: (name: string) => void;
+  nameCard: (character_name: string) => void;
 };
 
 export const GameLayout = () => {
@@ -66,7 +66,7 @@ export const GameLayout = () => {
     setPlayedCards([]);
   };
 
-  const nameCard = (name: string) => {
+  const nameCard = (character_name: string) => {
     const lastPlayedCard = playedCards.at(-1);
 
     if (!lastPlayedCard) {
@@ -74,14 +74,13 @@ export const GameLayout = () => {
     }
 
     const namedDeck = deck.map((card) => {
-      if (card.id === lastPlayedCard.id) {
-        // すでに名前がついていたら名前を更新しない
-        if (card.name !== "") {
-          return card;
-        }
+      if (
+        card.id === lastPlayedCard.id &&
+        (card.character_name === undefined || card.character_name === "")
+      ) {
         return {
           ...card,
-          name: name,
+          character_name,
         };
       }
       return card;
