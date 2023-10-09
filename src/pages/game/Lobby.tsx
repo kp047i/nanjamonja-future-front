@@ -10,7 +10,7 @@ import { useGame } from "../../features/Game/hooks/useGame";
 // 選択できるカードの最大の数
 const MAX_SELECTABLE_CARD_COUNT = 4;
 // 選択するカードの最小の数
-const MIN_SELECTABLE_CARD_COUNT = 2;
+const MIN_SELECTABLE_CARD_COUNT = 3;
 
 export const Lobby = () => {
   const {
