@@ -33,7 +33,7 @@ export const Play = () => {
   };
 
   const handleDisplayNameButtonClick = () => {
-    setDisplayingName(lastPlayedCard?.character_name ?? "");
+    setDisplayingName(lastPlayedCard?.character_name ?? "名前がまだないよ");
     setIsNameDisplayed(true);
   };
 
