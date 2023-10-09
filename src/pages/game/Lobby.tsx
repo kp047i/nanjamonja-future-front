@@ -83,16 +83,16 @@ export const Lobby = () => {
         )}
       </ParticipateHumans>
 
-      <GameStart
-        data-submittable={selectedCards.length > MIN_SELECTABLE_CARD_COUNT}
+      <Button
+        onClick={handleStartButtonClick}
+        style={{ fontSize: "24px", fontWeight: 800, color: "#fff" }}
       >
-        <Button
-          onClick={handleStartButtonClick}
-          style={{ fontSize: "24px", fontWeight: 800, color: "#fff" }}
+        <GameStart
+          data-submittable={selectedCards.length > MIN_SELECTABLE_CARD_COUNT}
         >
           Start!
-        </Button>
-      </GameStart>
+        </GameStart>
+      </Button>
     </GameLayout>
   );
 };
