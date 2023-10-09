@@ -198,6 +198,10 @@ const GoToRankingButton = styled.button`
   color: #fff;
   font-size: 18px;
   border-radius: 100vh;
+  &:hover {
+    background-color: #1c2b5f;
+    transition: all 0.3s;
+  }
 `;
 
 const DeckButton = styled.button`
