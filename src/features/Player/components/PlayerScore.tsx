@@ -14,9 +14,7 @@ export const PlayerScore: React.FC<PlayerScoreProps> = ({
       <PlayerInfo>{player.name}</PlayerInfo>
       <Score>
         <ButtonWrapper>
-          <Button onClick={() => handleAddScoreButton(player.id)}>
-            GET!
-          </Button>
+          <Button onClick={() => handleAddScoreButton(player.id)}>GET!</Button>
         </ButtonWrapper>
         <PlayerInfoScore>{player.score}</PlayerInfoScore>
       </Score>
@@ -55,10 +53,10 @@ const Button = styled.button`
 const PlayerInfoScore = styled.span`
   font-size: 24px;
   font-weight: 800;
-`
+`;
 
 const Score = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
-`
+`;

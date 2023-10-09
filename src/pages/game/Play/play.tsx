@@ -38,29 +38,38 @@ export const Play = () => {
     <StyledPlayLayout>
       <DeckArea>
         <DeckWrapper>
-        <button onClick={handleDeckClick}>
-          <img src="/images/deck.png" width={CARD_WIDTH} height={CARD_HEIGHT} />
-        </button>
-        <PointBudge data-type="rest">{deck.length}</PointBudge>
+          <DeckButton onClick={handleDeckClick}>
+            <img
+              src="/images/deck.png"
+              width={CARD_WIDTH}
+              height={CARD_HEIGHT}
+            />
+          </DeckButton>
+          <PointBudge data-type="rest">{deck.length}</PointBudge>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <p>カードをめくる</p>
+          </div>
         </DeckWrapper>
       </DeckArea>
       <DisplayCardArea>
         <CardWrapper>
           {playedCards.length > 0 ? (
             <>
-              <Card
-                src={lastPlayedCard?.content}
-                />
+              <Card src={lastPlayedCard?.content} />
               {/* {lastPlayedCard?.character_name ?? "カードの名前がありません"} */}
             </>
           ) : (
             <div
-            style={{
-              width: CARD_WIDTH,
-              height: CARD_HEIGHT,
-            }}
+              style={{
+                width: CARD_WIDTH,
+                height: CARD_HEIGHT,
+              }}
             ></div>
-            )}
+          )}
           <PointBudge data-type="point">{playedCards.length}</PointBudge>
         </CardWrapper>
       </DisplayCardArea>
@@ -129,7 +138,7 @@ const OperationArea = styled.div`
 
 const CardWrapper = styled.div`
   position: relative;
-`
+`;
 
 const Card = styled.img`
   width: 240px;
@@ -157,8 +166,16 @@ const PointBudge = styled.div`
   &[data-type="rest"] {
     background-color: #f3330d;
   }
-`
+`;
 
 const DeckWrapper = styled.div`
   position: relative;
+`;
+
+const DeckButton = styled.button`
+  cursor: pointer;
+  :hover {
+    transform: translateY(-4px);
+    transition: all 0.3s;
+  }
 `;
