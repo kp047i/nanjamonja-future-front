@@ -3,7 +3,7 @@ import { CardCheckBox } from "../../features/Card/components/CardCheckBox";
 
 import { useCards } from "../../features/Card/hooks/useCards";
 import { Card } from "../../features/Card/type";
-import { Button } from "../../components/Button";
+// import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { useGame } from "../../features/Game/hooks/useGame";
 
@@ -87,7 +87,7 @@ export const Lobby = () => {
         )}
       </ParticipateHumans>
 
-      <Button
+      <button
         onClick={handleStartButtonClick}
         style={{ fontSize: "24px", fontWeight: 800, color: "#fff" }}
       >
@@ -96,7 +96,7 @@ export const Lobby = () => {
         >
           Start!
         </GameStart>
-      </Button>
+      </button>
       <QRCode src="/images/qr.png" alt="" />
     </GameLayout>
   );
