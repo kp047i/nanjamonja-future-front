@@ -48,6 +48,10 @@ const Button = styled.button`
   font-size: 18px;
   font-weight: 800;
   cursor: pointer;
+  &:hover {
+    background-color: #1c2b5f;
+    transition: all 0.3s;
+  }
 `;
 
 const PlayerInfoScore = styled.span`
