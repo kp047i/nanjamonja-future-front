@@ -6,6 +6,8 @@ import { useGame } from "../../../features/Game/hooks/useGame";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const HIDDEN_SCORE_THRESHOLD = 15;
+
 export const Play = () => {
   const { deck, playCard, playedCards, players, addPoints, nameCard } =
     useGame();
@@ -97,6 +99,7 @@ export const Play = () => {
           <PlayerScore
             key={player.id}
             player={player}
+            hiddenScore={deck.length <= HIDDEN_SCORE_THRESHOLD}
             handleAddScoreButton={addPoints}
           />
         ))}
