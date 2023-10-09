@@ -43,24 +43,24 @@ export const Play = () => {
         残りの枚数: {deck.length}枚
       </DeckArea>
       <DisplayCardArea>
-        {playedCards.length > 0 ? (
-          <>
-            <img
-              src={lastPlayedCard?.content}
-              width={CARD_WIDTH}
-              height={CARD_HEIGHT}
-            />
-            {lastPlayedCard?.character_name ?? "カードの名前がありません"}
-          </>
-        ) : (
-          <div
+        <CardWrapper>
+          {playedCards.length > 0 ? (
+            <>
+              <Card
+                src={lastPlayedCard?.content}
+                />
+              {/* {lastPlayedCard?.character_name ?? "カードの名前がありません"} */}
+            </>
+          ) : (
+            <div
             style={{
               width: CARD_WIDTH,
               height: CARD_HEIGHT,
             }}
-          ></div>
-        )}
-        捨てられたカードの枚数: {playedCards.length}枚
+            ></div>
+            )}
+          <PointBudge>{playedCards.length}</PointBudge>
+        </CardWrapper>
       </DisplayCardArea>
       <PlayersArea>
         {players.map((player) => (
@@ -109,6 +109,7 @@ const DisplayCardArea = styled.div`
   grid-area: 1 / 2 / 2 / 3;
   display: grid;
   place-content: center;
+  position: relative;
 `;
 
 const PlayersArea = styled.div`
@@ -123,3 +124,31 @@ const OperationArea = styled.div`
   place-content: center;
   gap: 16px;
 `;
+
+const CardWrapper = styled.div`
+  position: relative;
+`
+
+const Card = styled.img`
+  width: 240px;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+`;
+
+const PointBudge = styled.div`
+  
+  width: 50px;
+  height: 50px;
+  background-color: #1ba951;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 800;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+`
