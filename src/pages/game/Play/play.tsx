@@ -5,6 +5,7 @@ import { PlayerScore } from "../../../features/Player/components/PlayerScore";
 import { useGame } from "../../../features/Game/hooks/useGame";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../../../components/Button";
 
 const HIDDEN_SCORE_THRESHOLD = 15;
 const ANIMATION_DURATION = 0.3 * 1000;
@@ -77,9 +78,9 @@ export const Play = () => {
               }}
             >
               ゲームが終了しました
-              <GoToRankingButton onClick={() => navigate("/game/ranking")}>
+              <Button onClick={() => navigate("/game/ranking")}>
                 ランキングへ
-              </GoToRankingButton>
+              </Button>
             </div>
           ) : (
             <>
@@ -113,16 +114,32 @@ export const Play = () => {
         ))}
       </PlayersArea>
       <OperationArea>
-        <div>
-          <input value={characterName} onChange={handleNameChange} />
-          <button onClick={handleNameButtonClick}>カードに名前をつける</button>
-        </div>
-        <div>
-          {isNameDisplayed && <span>{displayingName}</span>}
-          <button onClick={handleDisplayNameButtonClick}>
-            カードの名前を確認する
-          </button>
-        </div>
+        <label
+          style={{
+            display: "grid",
+          }}
+        >
+          カードの名前
+          <input
+            placeholder="モジャひめ"
+            value={characterName}
+            onChange={handleNameChange}
+          />
+        </label>
+        <Button onClick={handleNameButtonClick}>カードに名前をつける</Button>
+
+        {isNameDisplayed ? (
+          <span>{displayingName}</span>
+        ) : (
+          <span
+            style={{
+              borderBottom: "3px dotted #84cc16",
+            }}
+          ></span>
+        )}
+        <Button variant="secondary" onClick={handleDisplayNameButtonClick}>
+          カードの名前を確認する
+        </Button>
       </OperationArea>
     </StyledPlayLayout>
   );
@@ -164,6 +181,9 @@ const OperationArea = styled.div`
   display: grid;
   place-content: center;
   gap: 16px;
+  grid-template-columns: 300px 300px; /* 2カラム */
+  grid-template-rows: 48px 48px;
+  padding-bottom: 32px;
 `;
 
 const CardWrapper = styled.div`
@@ -220,19 +240,6 @@ const PointBudge = styled.div`
 
 const DeckWrapper = styled.div`
   position: relative;
-`;
-
-const GoToRankingButton = styled.button`
-  cursor: pointer;
-  background-color: #243779;
-  padding: 10px 40px;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 100vh;
-  &:hover {
-    background-color: #1c2b5f;
-    transition: all 0.3s;
-  }
 `;
 
 const DeckButton = styled.button`

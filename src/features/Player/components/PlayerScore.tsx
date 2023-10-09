@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Player } from "../type";
+import { Button } from "../../../components/Button";
 
 export type PlayerScoreProps = {
   player: Player;
@@ -39,22 +40,22 @@ const PlayerInfo = styled.span`
 
 const ButtonWrapper = styled.div``;
 
-const Button = styled.button`
-  width: 100%;
-  height: 100%;
-  border-radius: 100vh;
-  border: 4px solid #fff;
-  background-color: #243779;
-  padding: 10px 40px;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 800;
-  cursor: pointer;
-  &:hover {
-    background-color: #1c2b5f;
-    transition: all 0.3s;
-  }
-`;
+// const Button = styled.button`
+//   width: 100%;
+//   height: 100%;
+//   border-radius: 100vh;
+//   border: 4px solid #fff;
+//   background-color: #243779;
+//   padding: 10px 40px;
+//   color: #fff;
+//   font-size: 18px;
+//   font-weight: 800;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: #1c2b5f;
+//     transition: all 0.3s;
+//   }
+// `;
 
 const PlayerInfoScore = styled.span`
   font-size: 24px;
