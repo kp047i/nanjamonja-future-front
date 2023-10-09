@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { CardCheckBox } from "../../features/Card/components/CardCheckBox";
-import "./style.css";
 
 import { useCards } from "../../features/Card/hooks/useCards";
 import { Card } from "../../features/Card/type";
@@ -93,6 +92,7 @@ const GameLayout = styled.div`
 
 const CardList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 `;
 
