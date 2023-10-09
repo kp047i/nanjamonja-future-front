@@ -7,6 +7,8 @@ export type UseCards = {
 
 const GET_CARDS_URL = "https://h3nckvn8-8000.asse.devtunnels.ms/api/user/get/";
 
+const MAX_CARD_COUNT = 7;
+
 export const useCards = () => {
   const [cards, setCards] = useState<Card[] | null>(null);
   const [selectedCards, setSelectedCards] = useState<Card[]>([]);
@@ -23,7 +25,7 @@ export const useCards = () => {
   };
 
   const selectRandomCards = () => {
-    if (selectedCards.length === 8) {
+    if (selectedCards.length === MAX_CARD_COUNT) {
       return;
     }
 
@@ -36,7 +38,7 @@ export const useCards = () => {
         !selectedCards.some((selectedCard) => selectedCard.id === card.id)
     );
 
-    const numCardsToSelect = 8 - selectedCards.length;
+    const numCardsToSelect = MAX_CARD_COUNT - selectedCards.length;
     const selectedRandomCards = [];
 
     for (let i = 0; i < numCardsToSelect; i++) {
