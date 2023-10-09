@@ -97,12 +97,13 @@ export const Lobby = () => {
           Start!
         </GameStart>
       </button>
+      <QRCode src="/images/qr.png" alt="" />
     </GameLayout>
   );
 };
 
 const GameLayout = styled.div`
-  padding: 80px 200px 80px 100px;
+  padding: 80px 120px 80px 120px;
 `;
 
 const CardList = styled.div`
@@ -162,3 +163,10 @@ const Header = styled.div`
     font-size: 24px;
   }
 `;
+
+const QRCode = styled.img`
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  width: 100px;
+`

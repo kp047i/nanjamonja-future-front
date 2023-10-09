@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { CARD_WIDTH, CARD_HEIGHT } from "../../../features/Card/const";
 import { PlayerScore } from "../../../features/Player/components/PlayerScore";
 
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../../components/Button";
 
 const HIDDEN_SCORE_THRESHOLD = 15;
+const ANIMATION_DURATION = 0.3 * 1000;
 
 export const Play = () => {
   const { deck, playCard, playedCards, players, addPoints, nameCard } =
@@ -16,11 +17,17 @@ export const Play = () => {
   const [displayingName, setDisplayingName] = useState("");
   const [isNameDisplayed, setIsNameDisplayed] = useState(false);
   const lastPlayedCard = playedCards.at(-1);
+  const lastPrevPlayedCard = playedCards.at(-2);
+  const [animation, setAnimation] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleDeckClick = () => {
     setIsNameDisplayed(false);
+    setAnimation(true);
+    setTimeout(() => {
+      setAnimation(false);
+    }, ANIMATION_DURATION);
     playCard();
   };
 
@@ -34,7 +41,7 @@ export const Play = () => {
   };
 
   const handleDisplayNameButtonClick = () => {
-    setDisplayingName(lastPlayedCard?.character_name ?? "");
+    setDisplayingName(lastPlayedCard?.character_name ?? "名前がまだないよ");
     setIsNameDisplayed(true);
   };
 
@@ -79,7 +86,8 @@ export const Play = () => {
             <>
               {playedCards.length > 0 ? (
                 <>
-                  <Card src={lastPlayedCard?.content} />
+                  <Card src={lastPrevPlayedCard?.content} data-prev />
+                  <Card src={lastPlayedCard?.content} data-animation={animation} />
                   {/* {lastPlayedCard?.character_name ?? "カードの名前がありません"} */}
                 </>
               ) : (
@@ -182,10 +190,31 @@ const CardWrapper = styled.div`
   position: relative;
 `;
 
+const cardAnimation = keyframes`
+  0% {
+    transform: translate(0, 80px) rotate(-10deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+`;
+
 const Card = styled.img`
   width: 240px;
   border-radius: 20px;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  transform-origin: center bottom;
+  &[data-animation="true"] {
+    animation: ${cardAnimation} ${ANIMATION_DURATION}ms ease-out;
+  }
+  &[data-prev] {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const PointBudge = styled.div`
