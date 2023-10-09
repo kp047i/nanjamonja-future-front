@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { CardCheckBox } from "../../features/Card/components/CardCheckBox";
-import "./style.css";
 
 import { useCards } from "../../features/Card/hooks/useCards";
 import { Card } from "../../features/Card/type";
@@ -17,7 +16,7 @@ export const Lobby = () => {
   const { cards, selectedCards, appendSelectedCards, removeSelectedCards } =
     useCards();
 
-  const { createDeck } = useGame();
+  const { startGame } = useGame();
 
   const navigate = useNavigate();
 
@@ -39,7 +38,7 @@ export const Lobby = () => {
     if (selectedCards.length < MIN_SELECTABLE_CARD_COUNT) {
       return;
     }
-    createDeck(selectedCards);
+    startGame(selectedCards);
     navigate("/game/play");
   };
 
@@ -93,6 +92,7 @@ const GameLayout = styled.div`
 
 const CardList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 `;
 

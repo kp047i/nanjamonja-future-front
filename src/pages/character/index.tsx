@@ -1,4 +1,3 @@
-import "./style.css"
 import styled from "styled-components";
 
 import { UserNameScene } from "./components/scene/UserNameScene";
