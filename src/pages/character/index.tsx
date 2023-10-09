@@ -34,6 +34,9 @@ export const Character = () => {
         content: character
       }),
     }).then((res) => res.json());
+
+    setScene((prev) => prev + 1);
+
     return res;
   };
 
