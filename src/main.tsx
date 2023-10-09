@@ -9,6 +9,7 @@ import { Lobby } from "./pages/game/Lobby";
 import { Play } from "./pages/game/Play/play.tsx";
 import { GameLayout } from "./features/Game/GameContext.tsx";
 import { Character } from "./pages/character/index.tsx";
+import { Ranking } from "./pages/game/Ranking/ranking.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "play",
         element: <Play />,
+      },
+      {
+        path: "ranking",
+        element: <Ranking />,
       },
     ],
   },
