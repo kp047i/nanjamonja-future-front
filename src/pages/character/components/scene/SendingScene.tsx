@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-export const FinishScene = () => {
+export const SendingScene = () => {
   return (
     <Layout>
-      <p>作成完了だよ！</p>
-      <p>ゲーム画面を見てね！</p>
+      <p>送信中...</p>
     </Layout>
   );
 };
@@ -14,9 +13,8 @@ const Layout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   > p {
     font-size: 24px;
     font-weight: 800;
   }
-`;
+`

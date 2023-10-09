@@ -4,14 +4,14 @@ interface Props {
   selectColor: (color: string) => void;
 }
 
-const COLORS = ['#000000', '#EC5F43', '#B1DD8B', '#74A7FF', '#FDFB67', '#78D3F8']
+const COLORS = ['#000000', '#EC5F43', '#B1DD8B', '#74A7FF', '#FDFB67', '#78D3F8'];
 
 const ColorPicker = styled.div`
   width: 10vw;
   height: 10vw;
   border-radius: 50%;
   border: 4px solid #fff;
-`
+`;
 
 const ColorsWrapper = styled.div`
   box-sizing: border-box;
@@ -25,7 +25,7 @@ const ColorsWrapper = styled.div`
   left: 0;
   bottom: 0;
   background-color: #eee;
-`
+`;
 
 export const PickColors = ({selectColor}: Props) => {
   return (
@@ -37,4 +37,4 @@ export const PickColors = ({selectColor}: Props) => {
       ))}
     </ColorsWrapper>
   )
-}
+};
