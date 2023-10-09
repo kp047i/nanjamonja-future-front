@@ -192,7 +192,7 @@ const CardWrapper = styled.div`
 
 const cardAnimation = keyframes`
   0% {
-    transform: translate(0, 20px);
+    transform: translate(0, 80px) rotate(-10deg);
     opacity: 0;
   }
   100% {
@@ -205,6 +205,7 @@ const Card = styled.img`
   width: 240px;
   border-radius: 20px;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  transform-origin: center bottom;
   &[data-animation="true"] {
     animation: ${cardAnimation} ${ANIMATION_DURATION}ms ease-out;
   }
