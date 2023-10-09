@@ -18,9 +18,8 @@ const POST_CARD_URL = 'https://h3nckvn8-8000.asse.devtunnels.ms/api/user/insert/
 export const Character = () => {
   const [scene, setScene] = useState<Scene>(0);
   const [userName, setUserName] = useState<string>('');
-  const [character, setCharacter] = useState<string>('')
 
-  const sendCharacter = async () => {
+  const sendCharacter = async (datauri: string) => {
     setScene((prev) => prev + 1);
 
     const res = await fetch(POST_CARD_URL, {
@@ -30,7 +29,7 @@ export const Character = () => {
       },
       body: JSON.stringify({
         user_name: userName,
-        content: character
+        content: datauri
       }),
     }).then((res) => res.json());
 
@@ -42,7 +41,7 @@ export const Character = () => {
   return (
     <CharacterLayout>
       {scene === 0 && <UserNameScene next={() => setScene((prev) => prev + 1)} setUserName={setUserName} isSubmittable={userName.length > 0} />}
-      {scene === 1 && <OekakiScene next={sendCharacter} setCharacter={setCharacter} />}
+      {scene === 1 && <OekakiScene next={sendCharacter} />}
       {scene === 2 && <SendingScene /> }
       {scene === 3 && <FinishScene />}
     </CharacterLayout>

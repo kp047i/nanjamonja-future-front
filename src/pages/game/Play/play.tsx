@@ -4,6 +4,7 @@ import { PlayerScore } from "../../../features/Player/components/PlayerScore";
 
 import { useGame } from "../../../features/Game/hooks/useGame";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Play = () => {
   const { deck, playCard, playedCards, players, addPoints, nameCard } =
@@ -12,6 +13,8 @@ export const Play = () => {
   const [displayingName, setDisplayingName] = useState("");
   const [isNameDisplayed, setIsNameDisplayed] = useState(false);
   const lastPlayedCard = playedCards.at(-1);
+
+  const navigate = useNavigate();
 
   const handleDeckClick = () => {
     setIsNameDisplayed(false);
@@ -57,20 +60,36 @@ export const Play = () => {
       </DeckArea>
       <DisplayCardArea>
         <CardWrapper>
-          {playedCards.length > 0 ? (
-            <>
-              <Card src={lastPlayedCard?.content} />
-              {/* {lastPlayedCard?.character_name ?? "カードの名前がありません"} */}
-            </>
-          ) : (
+          {playedCards.length === 0 && deck.length === 0 ? (
             <div
               style={{
-                width: CARD_WIDTH,
-                height: CARD_HEIGHT,
+                display: "grid",
+                gap: "16px",
               }}
-            ></div>
+            >
+              ゲームが終了しました
+              <GoToRankingButton onClick={() => navigate("/game/ranking")}>
+                ランキングへ
+              </GoToRankingButton>
+            </div>
+          ) : (
+            <>
+              {playedCards.length > 0 ? (
+                <>
+                  <Card src={lastPlayedCard?.content} />
+                  {/* {lastPlayedCard?.character_name ?? "カードの名前がありません"} */}
+                </>
+              ) : (
+                <div
+                  style={{
+                    width: CARD_WIDTH,
+                    height: CARD_HEIGHT,
+                  }}
+                ></div>
+              )}
+              <PointBudge data-type="point">{playedCards.length}</PointBudge>
+            </>
           )}
-          <PointBudge data-type="point">{playedCards.length}</PointBudge>
         </CardWrapper>
       </DisplayCardArea>
       <PlayersArea>
@@ -170,6 +189,15 @@ const PointBudge = styled.div`
 
 const DeckWrapper = styled.div`
   position: relative;
+`;
+
+const GoToRankingButton = styled.button`
+  cursor: pointer;
+  background-color: #243779;
+  padding: 10px 40px;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 100vh;
 `;
 
 const DeckButton = styled.button`
