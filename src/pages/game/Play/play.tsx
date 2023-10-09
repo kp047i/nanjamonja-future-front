@@ -41,14 +41,21 @@ export const Play = () => {
     <StyledPlayLayout>
       <DeckArea>
         <DeckWrapper>
-          <button onClick={handleDeckClick}>
+          <DeckButton onClick={handleDeckClick}>
             <img
               src="/images/deck.png"
               width={CARD_WIDTH}
               height={CARD_HEIGHT}
             />
-          </button>
+          </DeckButton>
           <PointBudge data-type="rest">{deck.length}</PointBudge>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <p>カードをめくる</p>
+          </div>
         </DeckWrapper>
       </DeckArea>
       <DisplayCardArea>
@@ -191,4 +198,12 @@ const GoToRankingButton = styled.button`
   color: #fff;
   font-size: 18px;
   border-radius: 100vh;
+`;
+
+const DeckButton = styled.button`
+  cursor: pointer;
+  :hover {
+    transform: translateY(-4px);
+    transition: all 0.3s;
+  }
 `;

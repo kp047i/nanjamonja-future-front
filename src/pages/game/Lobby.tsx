@@ -10,7 +10,7 @@ import { useGame } from "../../features/Game/hooks/useGame";
 // 選択できるカードの最大の数
 const MAX_SELECTABLE_CARD_COUNT = 4;
 // 選択するカードの最小の数
-const MIN_SELECTABLE_CARD_COUNT = 2;
+const MIN_SELECTABLE_CARD_COUNT = 3;
 
 export const Lobby = () => {
   const {
@@ -59,6 +59,10 @@ export const Lobby = () => {
 
   return (
     <GameLayout>
+      <Header>
+        <h1>カード選択</h1>
+        <p>参加する人が描いたカードを選んでね</p>
+      </Header>
       <CardList>
         {cards.map((card) => (
           <CardWrapper>
@@ -88,7 +92,7 @@ export const Lobby = () => {
         style={{ fontSize: "24px", fontWeight: 800, color: "#fff" }}
       >
         <GameStart
-          data-submittable={selectedCards.length > MIN_SELECTABLE_CARD_COUNT}
+          data-submittable={selectedCards.length >= MIN_SELECTABLE_CARD_COUNT}
         >
           Start!
         </GameStart>
@@ -150,4 +154,11 @@ const ParticipateHumans = styled.div`
 
 const HumanImg = styled.img`
   width: 40px;
+`;
+
+const Header = styled.div`
+  margin-bottom: 32px;
+  > p {
+    font-size: 24px;
+  }
 `;
