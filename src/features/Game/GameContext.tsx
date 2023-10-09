@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Card } from "../../features/Card/type";
 import { Player } from "../Player/type";
+import styled from "styled-components";
 
 export type GameContext = {
   deck: Card[];
@@ -86,18 +87,28 @@ export const GameLayout = () => {
   };
 
   return (
-    <Outlet
-      context={
-        {
-          deck,
-          playedCards,
-          playCard,
-          players,
-          addPoints,
-          nameCard,
-          startGame,
-        } satisfies GameContext
-      }
-    />
+    <GameWrapper>
+      <Outlet
+        context={
+          {
+            deck,
+            playedCards,
+            playCard,
+            players,
+            addPoints,
+            nameCard,
+            startGame,
+          } satisfies GameContext
+        }
+      />
+    </GameWrapper>
   );
 };
+
+const GameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0 auto;
+`;
