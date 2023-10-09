@@ -7,8 +7,7 @@ import { BsFillTrashFill } from 'react-icons/bs'
 import { IoReturnDownBack } from 'react-icons/io5'
 
 interface Props {
-  next: () => void;
-  setCharacter: React.Dispatch<React.SetStateAction<string>>
+  next: (datauri: string) => Promise<void>;
 }
 
 const CanvasWrapper = styled.div`
@@ -72,9 +71,9 @@ const IconBackWrapper = styled.div`
 
 type Tab = 'color' | 'image';
 
-let canvasHistory: string[] = [];
+const canvasHistory: string[] = [];
 
-export const OekakiScene = ({ next, setCharacter }: Props) => { 
+export const OekakiScene = ({ next }: Props) => { 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
 
@@ -148,7 +147,7 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
 
   const clearCanvas = useCallback(() => {
     if (!ctx || !canvasRef.current) return;
-    const dataUrl = canvasRef.current?.toDataURL("image/jpeg", 0.75) as string;
+    const dataUrl = canvasRef.current?.toDataURL("image/jpeg") as string;
     canvasHistory.push(dataUrl);
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
@@ -160,7 +159,7 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
   }, [color, ctx])
 
   const touchStart = useCallback((e: TouchEvent<HTMLCanvasElement>) => {
-    const dataUrl = canvasRef.current?.toDataURL("image/jpeg", 0.75) as string;
+    const dataUrl = canvasRef.current?.toDataURL("image/jpeg") as string;
     canvasHistory.push(dataUrl);
     if (tab === 'color') {
       drawStart(e);
@@ -189,8 +188,9 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
     image.src = src
   };
 
-  const finishDrawCharacter = useCallback(() => {
-    next();
+  const finishDrawCharacter = useCallback(async () => {
+    const dataUrl = canvasRef.current?.toDataURL("image/jpeg", 0.75) as string;
+    await next(dataUrl);
   }, [next]);
 
   return (
