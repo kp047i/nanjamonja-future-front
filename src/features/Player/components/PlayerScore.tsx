@@ -13,12 +13,12 @@ export const PlayerScore: React.FC<PlayerScoreProps> = ({
     <StyledPlayerScore>
       <PlayerInfo>{player.name}</PlayerInfo>
       <Score>
-      <ButtonWrapper>
-        <Button onClick={() => handleAddScoreButton(player.id)}>
-          GET!
-        </Button>
-      </ButtonWrapper>
-      <PlayerInfoScore>{player.score}</PlayerInfoScore>
+        <ButtonWrapper>
+          <Button onClick={() => handleAddScoreButton(player.id)}>
+            GET!
+          </Button>
+        </ButtonWrapper>
+        <PlayerInfoScore>{player.score}</PlayerInfoScore>
       </Score>
     </StyledPlayerScore>
   );
