@@ -37,10 +37,12 @@ export const Play = () => {
   return (
     <StyledPlayLayout>
       <DeckArea>
+        <DeckWrapper>
         <button onClick={handleDeckClick}>
           <img src="/images/deck.png" width={CARD_WIDTH} height={CARD_HEIGHT} />
         </button>
-        残りの枚数: {deck.length}枚
+        <PointBudge data-type="rest">{deck.length}</PointBudge>
+        </DeckWrapper>
       </DeckArea>
       <DisplayCardArea>
         <CardWrapper>
@@ -59,7 +61,7 @@ export const Play = () => {
             }}
             ></div>
             )}
-          <PointBudge>{playedCards.length}</PointBudge>
+          <PointBudge data-type="point">{playedCards.length}</PointBudge>
         </CardWrapper>
       </DisplayCardArea>
       <PlayersArea>
@@ -136,10 +138,8 @@ const Card = styled.img`
 `;
 
 const PointBudge = styled.div`
-  
   width: 50px;
   height: 50px;
-  background-color: #1ba951;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -151,4 +151,14 @@ const PointBudge = styled.div`
   top: -20px;
   right: -20px;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  &[data-type="point"] {
+    background-color: #1ba951;
+  }
+  &[data-type="rest"] {
+    background-color: #f3330d;
+  }
 `
+
+const DeckWrapper = styled.div`
+  position: relative;
+`;
