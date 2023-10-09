@@ -2,6 +2,7 @@ import { TouchEvent, useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { PickColors } from "../element/PickColors";
 import { PickImages } from "../element/PickImages";
+import { NextButton } from "../element/NextButton";
 
 interface Props {
   next: () => void;
@@ -12,20 +13,14 @@ const CanvasWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 20vw;
-  height: 100%;
+  padding-top: 18vw;
+  height: 100svh;
 `
 
 const CanvasOekaki = styled.canvas`
-  width: 80%;
+  width: 70%;
   border-radius: 20px;
-  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
-`
-
-const FinishButton = styled.button`
-  position: fixed;
-  right: 10px;
-  top: 10px;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
 `
 
 const TabButton = styled.button`
@@ -139,16 +134,19 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
     }
   }, [tab, drawMove]);
 
-  const finishDrawCharacter = useCallback(() => {
+  const touchEnd = useCallback(() => {
     const dataUrl = canvasRef.current?.toDataURL("image/jpeg", 0.75) as string;
     setCharacter(dataUrl);
+  }, [setCharacter]);
+
+  const finishDrawCharacter = useCallback(() => {
     next();
-  }, [setCharacter, next])
+  }, [next]);
 
   return (
     <CanvasWrapper>
-      <FinishButton onClick={finishDrawCharacter}>完成</FinishButton>
-      <CanvasOekaki ref={canvasRef} width="1024" height="1433" onTouchStart={(e) => touchStart(e)} onTouchMove={(e) => touchMove(e)}></CanvasOekaki>
+      <NextButton onClick={finishDrawCharacter}>完成</NextButton>
+      <CanvasOekaki ref={canvasRef} width="1024" height="1433" onTouchStart={(e) => touchStart(e)} onTouchMove={(e) => touchMove(e)} onTouchEnd={touchEnd}></CanvasOekaki>
 
       <TabWrapper>
         <TabButton onClick={() => setTab('color')}>筆の色</TabButton>
