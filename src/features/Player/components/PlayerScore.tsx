@@ -3,10 +3,12 @@ import { Player } from "../type";
 
 export type PlayerScoreProps = {
   player: Player;
+  hiddenScore: boolean;
   handleAddScoreButton: (id: string) => void;
 };
 export const PlayerScore: React.FC<PlayerScoreProps> = ({
   player,
+  hiddenScore,
   handleAddScoreButton,
 }) => {
   return (
@@ -16,7 +18,7 @@ export const PlayerScore: React.FC<PlayerScoreProps> = ({
         <ButtonWrapper>
           <Button onClick={() => handleAddScoreButton(player.id)}>GET!</Button>
         </ButtonWrapper>
-        <PlayerInfoScore>{player.score}</PlayerInfoScore>
+        <PlayerInfoScore>{hiddenScore ? "?" : player.score}</PlayerInfoScore>
       </Score>
     </StyledPlayerScore>
   );
