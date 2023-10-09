@@ -134,16 +134,19 @@ export const OekakiScene = ({ next, setCharacter }: Props) => {
     }
   }, [tab, drawMove]);
 
-  const finishDrawCharacter = useCallback(() => {
+  const touchEnd = useCallback(() => {
     const dataUrl = canvasRef.current?.toDataURL("image/jpeg", 0.75) as string;
     setCharacter(dataUrl);
+  }, [setCharacter]);
+
+  const finishDrawCharacter = useCallback(() => {
     next();
-  }, [setCharacter, next])
+  }, [next]);
 
   return (
     <CanvasWrapper>
       <NextButton onClick={finishDrawCharacter}>完成</NextButton>
-      <CanvasOekaki ref={canvasRef} width="1024" height="1433" onTouchStart={(e) => touchStart(e)} onTouchMove={(e) => touchMove(e)}></CanvasOekaki>
+      <CanvasOekaki ref={canvasRef} width="1024" height="1433" onTouchStart={(e) => touchStart(e)} onTouchMove={(e) => touchMove(e)} onTouchEnd={touchEnd}></CanvasOekaki>
 
       <TabWrapper>
         <TabButton onClick={() => setTab('color')}>筆の色</TabButton>
